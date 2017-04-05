@@ -90,7 +90,7 @@ class CallbackModule(CallbackBase):
 
     def v2_runner_on_skipped(self, result):
         if C.DISPLAY_SKIPPED_HOSTS:
-            print("failed: " + result._result.__dict__)
+            print(colored("skipped: " + result._result.__dict__), "cyan")
 
     def v2_runner_on_unreachable(self, result):
         host = result._host.get_name()
