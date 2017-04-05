@@ -1,0 +1,27 @@
+- name: Starting VM
+  hosts: localhost
+  connection: local
+  tags: start
+
+  tasks:
+  - name: Ensure VM is Running
+    vagrant: 
+      path={{ playbook_dir }}/resources/vagrant
+      add_root_key=~/.ssh/id_rsa.pub
+      use_private_key=~/.ssh/id_rsa
+      state=running
+    register: vm
+    no_log: yes
+
+  - debug: var=vm
+
+  - name: Add VM into Inventory
+    add_host:
+      hostname: "vm"
+      ansible_connection: "paramiko"
+      ansible_host: "{{ vm.ip }}"
+      ansible_port: "{{ vm.port }}"
+      ansible_user: "{{ vm.user }}"
+      ansible_ssh_private_key_file: "{{ vm.key }}"
+      os_name: "{{ vm.os_name }}"
+      memory: "{{ vm.memory }}"

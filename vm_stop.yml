@@ -1,0 +1,8 @@
+- name: Stopping VM
+  hosts: localhost
+  connection: local
+  tags: stop
+
+  tasks:
+  - name: Ensure VM is stopped
+    vagrant: path={{ playbook_dir }}/resources/vagrant state=stopped

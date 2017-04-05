@@ -1,0 +1,4 @@
+- include: vm_start.yml
+- include: vm_tests.yml
+- include: vm_stop.yml
+- include: vm_destroy.yml

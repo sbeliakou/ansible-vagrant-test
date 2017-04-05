@@ -1,0 +1,8 @@
+- name: Destroying VM
+  hosts: localhost
+  connection: local
+  tags: destroy
+
+  tasks:
+  - name: Ensure VM is destroyed
+    vagrant: path={{ playbook_dir }}/resources/vagrant state=destroyed

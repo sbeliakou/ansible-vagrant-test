@@ -1,0 +1,18 @@
+- name: Testing VM
+  hosts: vm
+  tags: tests
+
+  vars:
+    info: |
+      Inventory Host Name = {{ inventory_hostname }} <- 'Ansible Inventory Variable'
+      VM Host = {{ ansible_host }} <- 'Ansible Inventory Variable'
+      Kernel Name = {{ ansible_kernel }} <- 'Discovered by Setup module'
+      Ram Memory = {{ ansible_memtotal_mb }} MB <- 'Discovered by Setup module'
+      Ram Memory = {{ (memory|int / 1024) | int }} MB <- 'Taken from Inventory'
+      OS Name = {{ ansible_distribution }} release {{ ansible_distribution_version }} ({{ ansible_distribution_release }}) <- 'Discovered by Setup module'
+      OS Name = {{ os_name }} <- 'Taken from Inventory'
+      User Name = {{ ansible_user }} <- 'Taken from Inventory'
+
+  tasks:
+  - name: Show Variables
+    debug: msg={{ info.split('\n') }}
